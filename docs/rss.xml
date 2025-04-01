@@ -1,5 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 20:02:32 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>搭建单群组FISCO BCOS链</title><link>https://cxbl-ops.github.io/post/da-jian-dan-qun-zu-FISCO%20BCOS-lian.html</link><description># 安装依赖
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 20:03:07 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>FISCO BOCO 控制台的安装及基础使用</title><link>https://cxbl-ops.github.io/post/FISCO%20BOCO%20-kong-zhi-tai-de-an-zhuang-ji-ji-chu-shi-yong.html</link><description># 一，安装依赖
+- 安装java(推荐14，实测11也可用)
+```bash
+apt install -y default-jdk
+```
+&lt;!--more--&gt;
+- 获取控制台并返回fisco目录
+```bash
+cd ~/fisco &amp;&amp; curl -LO https://github.com/FISCO-BCOS/console/releases/download/v2.9.2/download_console.sh &amp;&amp; bash download_console.sh
+```
+![image.png](/static/img/e46cb6a535e23cc7898e38a55e4477ca.image.webp)
+:::tip{title='提示'}
+如无法连接到github，则使用 cd ~/fisco &amp;&amp; curl -#LO https://gitee.com/FISCO-BCOS/console/raw/master-2.0/tools/download_console.sh &amp;&amp; bash download_console.sh
+:::
+- 拷贝控制台配置文件
+
+若节点未采用默认端口，请将文件中的20200替换成节点对应的channel端口。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/FISCO%20BOCO%20-kong-zhi-tai-de-an-zhuang-ji-ji-chu-shi-yong.html</guid><pubDate>Tue, 01 Apr 2025 20:02:42 +0000</pubDate></item><item><title>搭建单群组FISCO BCOS链</title><link>https://cxbl-ops.github.io/post/da-jian-dan-qun-zu-FISCO%20BCOS-lian.html</link><description># 安装依赖
 ```bash
 sudo apt install -y openssl curl
 ```
