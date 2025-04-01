@@ -1,5 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 20:03:07 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>FISCO BOCO 控制台的安装及基础使用</title><link>https://cxbl-ops.github.io/post/FISCO%20BOCO%20-kong-zhi-tai-de-an-zhuang-ji-ji-chu-shi-yong.html</link><description># 一，安装依赖
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 20:04:59 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Qemu-Kvm虚拟化使用挂载盘符所出现的问题及解决办法</title><link>https://cxbl-ops.github.io/post/Qemu-Kvm-xu-ni-hua-shi-yong-gua-zai-pan-fu-suo-chu-xian-de-wen-ti-ji-jie-jue-ban-fa.html</link><description>### 问题描述
+
+我想要使用qemu-kvm创建Windows虚拟机时，使用挂载的盘（在Windows中为D盘）作为Windwos的安装位置，但是出现了如下报错:
+
+
+
+```shell
+
+无法完成安装：'Cannot access storage file '/media/vir/qc/win10.qcow2' (as uid:64055, gid:109): 权限不够'
+Traceback (most recent call last):
+  File '/usr/share/virt-manager/virtManager/asyncjob.py', line 72, in cb_wrapper
+    callback(asyncjob, *args, **kwargs)
+  File '/usr/share/virt-manager/virtManager/createvm.py', line 2008, in _do_async_install
+    installer.start_install(guest, meter=meter)
+  File '/usr/share/virt-manager/virtinst/install/installer.py', line 695, in start_install
+    domain = self._create_guest(
+  File '/usr/share/virt-manager/virtinst/install/installer.py', line 637, in _create_guest
+    domain = self.conn.createXML(initial_xml or final_xml, 0)
+  File '/usr/lib/python3/dist-packages/libvirt.py', line 4400, in createXML
+    raise libvirtError('virDomainCreateXML() failed')
+libvirt.libvirtError: Cannot access storage file '/media/vir/qc/win10.qcow2' (as uid:64055, gid:109): 权限不够
+```
+### 问题解决
+
+这是常见的 KVM Libvirt 错误之一。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/Qemu-Kvm-xu-ni-hua-shi-yong-gua-zai-pan-fu-suo-chu-xian-de-wen-ti-ji-jie-jue-ban-fa.html</guid><pubDate>Tue, 01 Apr 2025 20:04:34 +0000</pubDate></item><item><title>FISCO BOCO 控制台的安装及基础使用</title><link>https://cxbl-ops.github.io/post/FISCO%20BOCO%20-kong-zhi-tai-de-an-zhuang-ji-ji-chu-shi-yong.html</link><description># 一，安装依赖
 - 安装java(推荐14，实测11也可用)
 ```bash
 apt install -y default-jdk
