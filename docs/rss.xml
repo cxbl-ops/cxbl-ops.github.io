@@ -1,5 +1,42 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:57:39 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>docker基础操作</title><link>https://cxbl-ops.github.io/post/docker-ji-chu-cao-zuo.html</link><description># 前言
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:58:31 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Docker 镜像加速</title><link>https://cxbl-ops.github.io/post/Docker%20-jing-xiang-jia-su.html</link><description>## 镜像源
+科大镜像：https://docker.mirrors.ustc.edu.cn/&lt;br&gt;
+网易：https://hub-mirror.c.163.com/&lt;br&gt;
+阿里云：https://&lt;阿里云id&gt;.mirror.aliyuncs.com&lt;br&gt;
+Docker 官方加速器: https://registry.docker-cn.com 
+&lt;!--more--&gt;
+## 针对 Ubuntu14.04、Debian7Wheezy 等系统
+* 编辑 /etc/default/docker 文件
+```bash
+DOCKER_OPTS='--registry-mirror=https://registry.docker-cn.com'
+```
+* 重启服务
+```bash
+ service docker restart
+```
+ ## 针对Ubuntu16.04+、Debian8+、CentOS7等系统
+ *  编辑/etc/docker/daemon.json文件（如果没有就新建）
+ ```bash
+ {
+        'registry-mirrors':[
+                'https://hub-mirror.c.163.com/',
+                'https://docker.mirrors.ustc.edu.cn/'
+        ]
+}
+```
+* 重新启动服务
+```bash
+systemctl daemon-reload
+systemctl restart docker
+```
+## 检查加速器是否生效
+```
+docker info
+```
+* 出现如下内容即为生效
+
+![image.png](/static/img/3217b6df7d0dd7c0880ad502f5be88b3.image.webp)
+。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/Docker%20-jing-xiang-jia-su.html</guid><pubDate>Tue, 01 Apr 2025 19:58:03 +0000</pubDate></item><item><title>docker基础操作</title><link>https://cxbl-ops.github.io/post/docker-ji-chu-cao-zuo.html</link><description># 前言
 Docker 是一种开源的容器化平台，用于开发、部署和运行应用程序。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/docker-ji-chu-cao-zuo.html</guid><pubDate>Tue, 01 Apr 2025 19:57:11 +0000</pubDate></item><item><title>Docker安装Hadoop集群</title><link>https://cxbl-ops.github.io/post/Docker-an-zhuang-Hadoop-ji-qun.html</link><description># 1.安装docker
 &lt;!-- more --&gt;
 ## 设置储存库
