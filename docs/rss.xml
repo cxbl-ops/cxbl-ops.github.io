@@ -1,2 +1,59 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:46:35 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:48:17 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Caliper压力测试工具(本地测试)</title><link>https://cxbl-ops.github.io/post/Caliper-ya-li-ce-shi-gong-ju-%28-ben-di-ce-shi-%29.html</link><description>## 1.安装nodejs,
+
+* 使用nvm或者系统自带的包管理器进行安装（apt或yum）
+
+* nodejs版本 =&gt; 8
+
+  ```bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash 
+  或
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+  执行
+  export NVM_DIR='$([ -z '${XDG_CONFIG_HOME-}' ] &amp;&amp; printf %s '${HOME}/.nvm' || printf %s '${XDG_CONFIG_HOME}/nvm')'
+  [ -s '$NVM_DIR/nvm.sh' ] &amp;&amp; \. '$NVM_DIR/nvm.sh' # 添加环境变量
+  ```
+&lt;!--more--&gt;
+## 2.部署Docker
+
+* docker 版本  &gt;= 18.06.01
+
+* 安装指南:
+
+  执行
+
+  ```bash
+  apt install docker.io 
+  或
+  yum install docker
+  ```
+&lt;!--more--&gt;
+## 3.部署Caliper
+
+*  新建工作目录
+
+  ```bash
+  mkdir benchmarks &amp;&amp; cd benchmarks
+  ```
+
+* 初始化npm项目
+
+  ```bash
+  npm init
+  ```
+
+* 安装`caliper-cli`
+
+  ```bash
+  npm install --only=prod @hyperledger/caliper-cli@0.2.0
+  ```
+
+* 测试是否安装成功
+
+  ```bash
+  npx caliper --version
+  ```
+
+* 绑定区块链平台
+
+  * 由于Caliper采用了轻量级的部署方式，因此需要显式的绑定步骤指定要测试的平台及适配器版本，`caliper-cli`会自动进行相应依赖项的安装。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/Caliper-ya-li-ce-shi-gong-ju-%28-ben-di-ce-shi-%29.html</guid><pubDate>Tue, 01 Apr 2025 19:36:19 +0000</pubDate></item></channel></rss>
