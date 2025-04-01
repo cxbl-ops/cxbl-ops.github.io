@@ -1,5 +1,142 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:58:31 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Docker 镜像加速</title><link>https://cxbl-ops.github.io/post/Docker%20-jing-xiang-jia-su.html</link><description>## 镜像源
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:59:23 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Geth-1.11.6-PoW机制</title><link>https://cxbl-ops.github.io/post/Geth-1.11.6-PoW-ji-zhi.html</link><description># 测试环境
+- ubuntu22.04
+- Geth-1.11.6
+
+&lt;!-- more --&gt;
+
+# 1.拉取代码
+
+```bash
+cd /usr/local
+git clone https://github.com/ethereum/go-ethereum.git
+```
+## 切换分支
+```bash
+git checkout  v1.11.6
+```
+
+## 查看当前分支
+
+```bash
+git branch
+```
+
+## 编译geth
+
+```bash
+make geth
+```
+
+## 设置软链接
+
+```bash
+ln -s /usr/local/go-ethereum/build/bin/geth geth
+ln -s /usr/local/go-ethereum/build/bin/bootnode bootnode
+```
+
+## 查看版本
+
+```bash
+geth version
+```
+
+# 2.搭建私链
+
+## 创建数据目录
+
+```bash
+cd /mnt
+mkdir myeth
+cd mygeth
+mkdir node1
+```
+
+## 创建账号
+
+```bash
+geth --datadir node1/ account new
+```
+
+## 记录账号密码
+
+```bash
+echo '0x00000000000000000000000000000000' &gt;&gt; account.txt
+echo '1234' &gt; node1/password.txt
+```
+
+## 创建创始区块文件
+
+```bash
+vim genesis.json
+```
+
+## 内容
+
+```json
+{
+  'config': {
+    'chainId': 7874,
+    'homesteadBlock': 0,
+    'eip150Block': 0,
+    'eip155Block': 0,
+    'eip158Block': 0,
+    'byzantiumBlock': 0,
+    'constantinopleBlock': 0,
+    'petersburgBlock': 0,
+    'istanbulBlock': 0,
+    'berlinBlock': 0,
+    'londonBlock': 0
+  },
+  'alloc': {},
+  'nonce': '0x0000000000000042',
+  'difficulty': '0x20000',
+  'coinbase': '0x000000000000000000000000000000000',
+  'extraData': '',
+  'mixhash': '0x0000000000000000000000000000000000000000000000000000000000000000',
+  'parentHash': '0x0000000000000000000000000000000000000000000000000000000000000000',
+  'gasLimit': '0x2fefd8',
+  'timestamp': '0x00'
+}
+
+```
+
+## 查看当前目录
+
+```bash
+tree ./
+```
+
+## 初始化私链
+
+```bash
+geth --datadir node1 init genesis.json
+```
+
+## 编写启动脚本(vim genesis.json)
+
+```bash
+geth --datadir /mnt/myeth/node1 --identity 'node1' --networkid 7874 --http --http.addr '127.0.0.1' --http.port 8545 --http.api 'eth,net,web3,personal,miner' --mine --miner.threads=1 --miner.etherbase=0x0000000000000000000000000000000000000000 --allow-insecure-unlock --unlock '0x00000000000000000000000000000000000' --password node1/password.txt &gt; node1.log 2&gt;&amp;1 &amp;
+```
+
+## 编写控制台脚本(vim console1.sh)
+
+```bash
+geth attach ipc:/mnt/myeth/node1/geth.ipc
+```
+
+## 修改权限
+
+```bash
+chmod u+rwx ./node1.sh ./console1.sh
+```
+
+## 启动脚本
+
+```bash
+./node1.sh &amp;&amp; ./console1.sh
+```
+。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/Geth-1.11.6-PoW-ji-zhi.html</guid><pubDate>Tue, 01 Apr 2025 19:58:55 +0000</pubDate></item><item><title>Docker 镜像加速</title><link>https://cxbl-ops.github.io/post/Docker%20-jing-xiang-jia-su.html</link><description>## 镜像源
 科大镜像：https://docker.mirrors.ustc.edu.cn/&lt;br&gt;
 网易：https://hub-mirror.c.163.com/&lt;br&gt;
 阿里云：https://&lt;阿里云id&gt;.mirror.aliyuncs.com&lt;br&gt;
