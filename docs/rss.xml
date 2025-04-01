@@ -1,5 +1,147 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 19:59:23 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Geth-1.11.6-PoW机制</title><link>https://cxbl-ops.github.io/post/Geth-1.11.6-PoW-ji-zhi.html</link><description># 测试环境
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>OrangeTech Blog</title><link>https://cxbl-ops.github.io</link><description>你还有好多未完成的梦，你有什么理由停下脚步</description><copyright>OrangeTech Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/119595868</url><title>avatar</title><link>https://cxbl-ops.github.io</link></image><lastBuildDate>Tue, 01 Apr 2025 20:00:03 +0000</lastBuildDate><managingEditor>OrangeTech Blog</managingEditor><ttl>60</ttl><webMaster>OrangeTech Blog</webMaster><item><title>Hadoop单机版</title><link>https://cxbl-ops.github.io/post/Hadoop-dan-ji-ban.html</link><description># 一，安装jdk
+一般为
+```bash
+apt install openjdk-8-jdk
+```
+默认安装位置在`/usr/lib/jvm/`文件夹中
+&lt;!--more--&gt;
+# 二，下载hadoop
+- 创建文件夹
+```bash
+mkdir /usr/local/hadoop
+```
+- 下载命令
+```bash
+ wget https://archive.apache.org/dist/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz -O /usr/local/hadoop/hadoop-3.1.3.tar.gz
+ ```
+ - 进入`/usr/local/hadoop`目录解压缩
+ ```bash
+ tar -zxvf hadoop-3.1.3.tar.gz
+ ```
+ # 三，配置hadoop
+ - 配置hadoop启动项
+ ```bash
+vim /etc/profile.d/hadoop.sh
+export HADOOP_HOME=/usr/local/hadoop/hadoop-3.1.3
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+source /etc/profile
+ ```
+ - 创建hadoop用户(使用root用户启动可跳过)
+ ```bash
+新建用户
+adduser hadoop
+设置密码
+passwd hadoop
+新建用户组
+groupadd hadoop
+用户加到用户组
+usermod -G hadoop hadoop
+ ```
+ - 创建hadoop文件目录并授权
+ ```bash
+mkdir -p /home/hadoop/tmp # 临时文件目录
+mkdir -p /home/hadoop/hdfs/name # namenode文件目录
+mkdir -p /home/hadoop/hdfs/data # datanode文件目录
+mkdir -p /home/hadoop/log # 日志文件目录
+sudo chown -R hadoop /home/hadoop # 设置hadoop目录所有者
+```
+# 四，修改hadoop配置文件
+## 以下操作均在`usr/local/hadoop/hadoop-3.1.3/etc/hadoop`目录&lt;br&gt;
+-  hadoop-env.sh
+在`hadoop-env.sh`中找到`export JAVA_HOME=`并修改为
+```
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+```
+- core-site.xml
+```xml
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+        &lt;description&gt;hdfs监听端口&lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;file:/home/hadoop/tmp&lt;/value&gt;
+        &lt;description&gt;hadoop临时数据存放&lt;/description&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+```
+- hdfs-site.xml
+```xml
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;file:/home/hadoop/hdfs/name&lt;/value&gt;
+        &lt;description&gt;HDFS的元数据储存目录&lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;file:/home/hadoop/hdfs/data&lt;/value&gt;
+         &lt;description&gt;数据块存储目录&lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+      &lt;description&gt;HDFS中数据块的复制因子,value代表复制次数&lt;/description&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+```
+
+:::tip{title='提示'}
+root用户还需要在`hadoop-3.1.3/sbin`目录下修改`start-dfs.sh，stop-dfs.sh，start-yarn.sh，stop-yarn.sh`在顶部添加即可
+:::
+- start-dfs.sh &amp; stop-dfs.sh
+```bash
+HDFS_DATANODE_USER=root
+HADOOP_SECURE_DN_USER=hdfs
+HDFS_NAMENODE_USER=root
+HDFS_SECONDARYNAMENODE_USER=root
+```
+- start-yarn.sh &amp; stop-yarn.sh
+ ```bash
+YARN_RESOURCEMANAGER_USER=root
+HADOOP_SECURE_DN_USER=yarn
+YARN_NODEMANAGER_USER=root
+ ```
+# 五，设置SSH免密访问本地
+- 切换至`/home/hadoop`目录下,也就是刚才新建的用户目录
+```bash
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+输入以下命令，测试免密是否成功
+```bash
+ssh localhost
+```
+如创建的时候提示`.ssh目录`不存在，则切回root用户自行创建后再使用hadoop用户创建
+
+:::tip{title='提示'}
+root用户也需要设置免密登录
+:::
+- root用户：
+   ```bash
+  ssh-keygen -t rsa #rsa和上面的dsa表示加密方式
+  cat ~/.ssh/id_rsa.pub &gt; ~/.ssh/authorized_keys
+   ```
+
+# 六，启动hadoop
+- 格式化hadoop文件系统
+```bash
+./bin/hdfs namenode -format
+```
+- 启动
+```
+./sbin/start-all.sh
+```
+-使用`jps`命令查看是否启动成功
+
+![image.png](/static/img/59736f802af3e3d04ded902263df16ba.image.webp)
+
+。</description><guid isPermaLink="true">https://cxbl-ops.github.io/post/Hadoop-dan-ji-ban.html</guid><pubDate>Tue, 01 Apr 2025 19:59:37 +0000</pubDate></item><item><title>Geth-1.11.6-PoW机制</title><link>https://cxbl-ops.github.io/post/Geth-1.11.6-PoW-ji-zhi.html</link><description># 测试环境
 - ubuntu22.04
 - Geth-1.11.6
 
