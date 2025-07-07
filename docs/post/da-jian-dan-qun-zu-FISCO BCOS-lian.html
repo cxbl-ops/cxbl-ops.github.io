@@ -172,26 +172,26 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <h2>创建操作目录</h2>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c1">cd</span> <span class="pl-k">~</span> <span class="pl-k">&amp;&amp;</span> mkdir -p fisco <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">cd</span> fisco</pre></div>
-<p><a target="_blank" rel="noopener noreferrer" href="/static/img/7e274b7811f9061a09fe1b91f1fee5f9.image.webp"><img src="/static/img/7e274b7811f9061a09fe1b91f1fee5f9.image.webp" alt="image.png" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="/static/img/7e274b7811f9061a09fe1b91f1fee5f9.image.webp"><img src="/static/img/7e274b7811f9061a09fe1b91f1fee5f9.image.webp" alt="image.png" style="max-width: 100%;"></a></p>
 <h2>下载脚本</h2>
 <div class="highlight highlight-source-shell"><pre class="notranslate">curl -#LO https://github.com/FISCO-BCOS/FISCO-BCOS/releases/download/v2.9.1/build_chain.sh <span class="pl-k">&amp;&amp;</span> chmod u+x build_chain.sh</pre></div>
 <h2>创建4节点</h2>
 <div class="highlight highlight-source-shell"><pre class="notranslate">bash build_chain.sh -l 127.0.0.1:4 -p 30300,20200,8545</pre></div>
-<p><a target="_blank" rel="noopener noreferrer" href="/static/img/505d092e1e04e740f01a0ce2bbafc60e.image.webp"><img src="/static/img/505d092e1e04e740f01a0ce2bbafc60e.image.webp" alt="image.png" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="/static/img/505d092e1e04e740f01a0ce2bbafc60e.image.webp"><img src="/static/img/505d092e1e04e740f01a0ce2bbafc60e.image.webp" alt="image.png" style="max-width: 100%;"></a></p>
 
 <h2>启动所有节点</h2>
 <div class="highlight highlight-source-shell"><pre class="notranslate">bash nodes/127.0.0.1/start_all.sh</pre></div>
-<p><a target="_blank" rel="noopener noreferrer" href="/static/img/9fe412d60af3c56b87763c6a7d310837.image.webp"><img src="/static/img/9fe412d60af3c56b87763c6a7d310837.image.webp" alt="image.png" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="/static/img/9fe412d60af3c56b87763c6a7d310837.image.webp"><img src="/static/img/9fe412d60af3c56b87763c6a7d310837.image.webp" alt="image.png" style="max-width: 100%;"></a></p>
 <h2>检查进程</h2>
 <div class="highlight highlight-source-shell"><pre class="notranslate">ps -ef <span class="pl-k">|</span> grep -v grep <span class="pl-k">|</span> grep fisco-bcos</pre></div>
-<p><a target="_blank" rel="noopener noreferrer" href="/static/img/ba678a8114064ca7530218c1eeea712c.image.webp"><img src="/static/img/ba678a8114064ca7530218c1eeea712c.image.webp" alt="image.png" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="/static/img/ba678a8114064ca7530218c1eeea712c.image.webp"><img src="/static/img/ba678a8114064ca7530218c1eeea712c.image.webp" alt="image.png" style="max-width: 100%;"></a></p>
 <h2>检查日志输出</h2>
 <h4>查看node0连接的节点数</h4>
 <div class="highlight highlight-source-shell"><pre class="notranslate">tail -f nodes/127.0.0.1/node0/log/log<span class="pl-k">*</span>  <span class="pl-k">|</span> grep connected</pre></div>
-<p><a target="_blank" rel="noopener noreferrer" href="/static/img/7dcf1e2114c1c3e43a48f547cbb34b3d.image.webp"><img src="/static/img/7dcf1e2114c1c3e43a48f547cbb34b3d.image.webp" alt="image.png" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="/static/img/7dcf1e2114c1c3e43a48f547cbb34b3d.image.webp"><img src="/static/img/7dcf1e2114c1c3e43a48f547cbb34b3d.image.webp" alt="image.png" style="max-width: 100%;"></a></p>
 <h4>检查是否共识</h4>
 <div class="highlight highlight-source-shell"><pre class="notranslate">tail -f nodes/127.0.0.1/node0/log/log<span class="pl-k">*</span>  <span class="pl-k">|</span> grep +++</pre></div>
-<p><a target="_blank" rel="noopener noreferrer" href="/static/img/03c4e2475afba9da2ec136debbe1c69b.image.webp"><img src="/static/img/03c4e2475afba9da2ec136debbe1c69b.image.webp" alt="image.png" style="max-width: 100%; height: auto;"></a><br>
+<p><a target="_blank" rel="noopener noreferrer" href="/static/img/03c4e2475afba9da2ec136debbe1c69b.image.webp"><img src="/static/img/03c4e2475afba9da2ec136debbe1c69b.image.webp" alt="image.png" style="max-width: 100%;"></a><br>
 至此，FISCO BCOC联盟链单群组4节点搭建完成<br><br>
 本文参考链接：<a href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html" rel="nofollow">https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html</a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
